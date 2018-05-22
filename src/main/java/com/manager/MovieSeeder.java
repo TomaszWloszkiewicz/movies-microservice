@@ -3,6 +3,7 @@ package com.manager;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,19 +20,23 @@ public class MovieSeeder implements CommandLineRunner {
 
         Movie movie1 = new Movie("Intouchables",
                 8.64d, "Olivier Nakache",
-                Arrays.asList("Omar Sy", "Anna Le Ny"), "2011");
+                Arrays.asList("Omar Sy", "Anna Le Ny"),
+                MovieService.getDataFormatFromNow(Instant.now()));
 
         Movie movie2 = new Movie("Killer",
                 7.7d, "Juliusz Machulski",
-                Arrays.asList("Cezary Pazura", "Jerzy Stuhr"), "1999");
+                Arrays.asList("Cezary Pazura", "Jerzy Stuhr"),
+                MovieService.getDataFormatFromNow(Instant.now()));
 
         Movie movie3 = new Movie("TheGreenMile",
                 8.61d, "Frank Darabont",
-                Arrays.asList("Tom Hanks", "David Morse"), "1999");
+                Arrays.asList("Tom Hanks", "David Morse"),
+                MovieService.getDataFormatFromNow(Instant.now()));
 
         Movie movie4 = new Movie("TheShawshankRedemption",
                 8.75d, "Frank Darabont",
-                Arrays.asList("Tim Robbins", "Morgan Freeman"), "1994");
+                Arrays.asList("Tim Robbins", "Morgan Freeman"),
+                MovieService.getDataFormatFromNow(Instant.now()));
 
 
         this.movieRepository.deleteAll();

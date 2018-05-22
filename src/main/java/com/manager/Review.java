@@ -1,32 +1,64 @@
 package com.manager;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Document(collection = "Reviews")
 public class Review {
+    @Id
+    private String id;
+    private String movieId;
+    private String reviewContent;
+    private Double rating;
     private String userName;
-    private int rating;
-    private String review;
+    @JsonIgnore
     private boolean approved;
 
-    protected Review() {
+    public Review() {
     }
 
-    public Review(String userName, int rating, String review, boolean approved) {
-        this.userName = userName;
-        this.review = review;
+    public Review(String id, String movieId, String reviewContent, Double rating, String userName, boolean approved) {
+        this.id = id;
+        this.movieId = movieId;
+        this.reviewContent = reviewContent;
         this.rating = rating;
+        this.userName = userName;
         this.approved = approved;
+    }
+
+
+    public String getId() {
+        return id;
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public String getReviewContent() {
+        return reviewContent;
+    }
+
+    public Double getRating() {
+        return rating;
     }
 
     public String getUserName() {
         return userName;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public String getReview(){ return review; }
-
     public boolean isApproved() {
         return approved;
     }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 }
+
