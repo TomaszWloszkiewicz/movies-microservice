@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 public class MovieController {
     private MovieService movieService;
 
@@ -22,7 +22,6 @@ public class MovieController {
 
         this.movieService = movieService;
     }
-
 
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -46,9 +45,9 @@ public class MovieController {
     }
 
 
-    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateMovie(Movie movie){
-        Movie result = movieService.getMovieById(movie.getId());
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateMovie(@PathVariable("id") String movieId, @RequestBody Movie movie){
+        Movie result = movieService.getMovieById(movieId);
         if(result == null){
             return new Response("Movie does not exist", HttpStatus.NOT_FOUND);
         }
@@ -68,7 +67,7 @@ public class MovieController {
     }
 
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getAllMovies(){
         List<Movie> result = movieService.getAllMovies();
         if(result.isEmpty()){
@@ -88,22 +87,20 @@ public class MovieController {
     }
 
 
-    @RequestMapping(value = "/all/sortedByRating", method = RequestMethod.GET)
+    @RequestMapping(value = "/sortedByRating", method = RequestMethod.GET)
     public ResponseEntity<?> getMoviesSortedByRating(){
         List<Movie> result = movieService.getMoviesSortedByRating();
-        if(result.isEmpty()){
-            return new Response("Could not finde movie", HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<List<Movie>>(result, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/addreview", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/reviews", method = RequestMethod.POST)
     public ResponseEntity<?> createReviewForMovie(@PathVariable("id") String id,
                                                   @RequestBody Review review){
         boolean addedFlag = movieService.addReviewForMovie(review, id);
         if(addedFlag == false){
             return new Response("Could not add review", HttpStatus.NOT_FOUND);
         }
-        return new Response("Review added", HttpStatus.OK);
+        return new Response("System received the request. It will process as fast as possible.",
+                HttpStatus.OK);
     }
 }

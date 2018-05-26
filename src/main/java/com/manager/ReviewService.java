@@ -1,17 +1,30 @@
 package com.manager;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 @Service
+@EnableAsync
 public class ReviewService {
     private ReviewRepository reviewRepository;
 
     @Autowired
     public ReviewService(ReviewRepository reviewRepository){
         this.reviewRepository = reviewRepository;
+        this.reviewRepository.deleteAll();
     }
 
 
@@ -19,19 +32,16 @@ public class ReviewService {
         return reviewRepository.findById(id);
     }
 
-    public boolean addReview(Review review){
-        if (review.getReviewContent().length() < 10
-                || review.getReviewContent().length() > 250) {
-            return false;
-        }else if(review.getRating()<1d || review.getRating() > 10d){
-            return false;
-        }else if(review.getUserName().length() < 1
-                || review.getUserName().length() > 15){
-            return false;
+   @Async
+    public void addReview(Review review){
+        try {
+            //Someone has to accept review.. wait a minute please
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         review.setApproved(true);
         reviewRepository.save(review);
-        return review.isApproved();
     }
 
     public void updateReview(Review review){

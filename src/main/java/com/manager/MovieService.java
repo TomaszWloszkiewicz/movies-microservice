@@ -5,14 +5,23 @@ import java.time.Instant;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 @Service
 public class MovieService {
     private MovieRepository movieRepository;
     private ReviewService reviewService;
+
 
     @Autowired
     public MovieService(MovieRepository movieRepository, ReviewService reviewService){
@@ -26,17 +35,15 @@ public class MovieService {
     }
 
     public boolean addMovie(Movie movie){
-        if(movie.getTitle().length()<3 || movie.getTitle().length()>50){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Movie>> violations = validator.validate(movie);
+        if(violations.size()>0){
             return false;
-        }else if(!(movie.getTitle().chars().allMatch(Character::isLetter))){
-            return false;
-        }else if(movie.getRating()<1d || movie.getRating()>10d){
-            return false;
-        }else{
-            movie.setAddedAt(getDataFormatFromNow(Instant.now()));
-            movieRepository.save(movie);
-            return true;
         }
+        movie.setAddedAt(getDataFormatFromNow(Instant.now()));
+        movieRepository.save(movie);
+        return true;
     }
 
     public void updateMovie(Movie movie){
@@ -67,10 +74,14 @@ public class MovieService {
 
     public boolean addReviewForMovie(Review review, String movieId){
         Movie movie = movieRepository.findById(movieId);
-        if(movie == null){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Review>> violations = validator.validate(review);
+        if(movie == null || violations.size() > 0){
             return false;
         }
         review.setMovieId(movieId);
-        return reviewService.addReview(review);
+        reviewService.addReview(review);
+        return true;
     }
 }

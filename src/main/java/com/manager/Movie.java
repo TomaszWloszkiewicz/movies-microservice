@@ -3,17 +3,21 @@ package com.manager;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.List;
-
-/**
- * Created by Komp on 2018-05-18.
- */
 
 @Document(collection = "Movies")
 public class Movie {
     @Id
     private String id;
+    @Size(min = 3, max = 50)
+    @Pattern(regexp = "^[A-Za-z]+$")
     private String title;
+    @Min(value = 1)
+    @Max(value = 10)
     private Double rating;
     private String director;
     private List<String> actors;

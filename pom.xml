@@ -85,6 +85,7 @@
                 </executions>
             </plugin>
         </plugins>
+        <finalName>moviesmanager</finalName>
 
     </build>
 
