@@ -1,6 +1,6 @@
-package com.manager;
+package com.movie.com.manager.repository;
 
-import com.manager.Movie;
+import com.movie.model.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import org.springframework.stereotype.Repository;

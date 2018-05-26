@@ -1,6 +1,8 @@
-package com.manager;
+package com.movie.com.manager.service;
 
-import org.springframework.boot.CommandLineRunner;
+import com.movie.com.manager.repository.MovieRepository;
+import com.movie.model.Movie;
+import com.movie.com.manager.repository.MovieRepository;import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

@@ -1,4 +1,4 @@
-package com.manager;
+package com.movie.com.manager.service;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -6,9 +6,9 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
+import com.movie.com.manager.repository.MovieRepository;
+import com.movie.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +20,11 @@ import javax.validation.ValidatorFactory;
 @Service
 public class MovieService {
     private MovieRepository movieRepository;
-    private ReviewService reviewService;
 
 
     @Autowired
-    public MovieService(MovieRepository movieRepository, ReviewService reviewService){
+    public MovieService(MovieRepository movieRepository){
         this.movieRepository = movieRepository;
-        this.reviewService = reviewService;
     }
 
 
@@ -70,18 +68,5 @@ public class MovieService {
 
     public static String getDataFormatFromNow(Instant now){
         return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(Date.from(now));
-    }
-
-    public boolean addReviewForMovie(Review review, String movieId){
-        Movie movie = movieRepository.findById(movieId);
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<Review>> violations = validator.validate(review);
-        if(movie == null || violations.size() > 0){
-            return false;
-        }
-        review.setMovieId(movieId);
-        reviewService.addReview(review);
-        return true;
     }
 }
