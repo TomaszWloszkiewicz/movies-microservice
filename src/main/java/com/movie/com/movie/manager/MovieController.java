@@ -29,7 +29,7 @@ public class MovieController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createMovie(@RequestBody Movie movie){
-        Boolean addedFlag = movieService.addMovie(movie);
+        boolean addedFlag = movieService.addMovie(movie);
         if(!addedFlag){
             return new Response("Title must have at least 3 characters up to 50 and can contain only letters. "
                     + "Rating should be between 1 and 10.", HttpStatus.BAD_REQUEST);
@@ -50,11 +50,11 @@ public class MovieController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateMovie(@PathVariable("id") String movieId, @RequestBody Movie movie){
-        Movie result = movieService.getMovieById(movieId);
-        if(result == null){
-            return new Response("Movie does not exist", HttpStatus.NOT_FOUND);
+        boolean updatedFlag = movieService.updateMovie(movie, movieId);
+        if(updatedFlag == false){
+            return new Response("Can not update movie", HttpStatus.NOT_ACCEPTABLE);
         }
-        movieService.updateMovie(movie);
+
         return new Response("Movie updated", HttpStatus.OK);
     }
 

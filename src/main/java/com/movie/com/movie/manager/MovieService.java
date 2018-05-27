@@ -44,8 +44,17 @@ public class MovieService {
         return true;
     }
 
-    public void updateMovie(Movie movie){
+    public boolean updateMovie(Movie movie, String movieId){
+        Movie movie1 = movieRepository.findById(movieId);
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Movie>> violations = validator.validate(movie);
+        if(violations.size()>0 || movie1 == null){
+            return false;
+        }
+        movie.setAddedAt(getDataFormatFromNow(Instant.now()));
         movieRepository.save(movie);
+        return true;
     }
 
     public void deleteMovie(String id){
