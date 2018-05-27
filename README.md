@@ -1,5 +1,5 @@
 # movies-microservice
-Repository contain simple microservice for managing movies. It is connected with approving-microservice.
+Repository contain simple microservice for managing movies. It is connected with approving-microservice. At the beginning there are 4 films available. Reviews should be automatically added after 1 minute.
 
 **Create movie**
 * *URL:*
