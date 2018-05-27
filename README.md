@@ -8,7 +8,7 @@ Repository contain simple microservice for managing movies. It is connected with
 * *Method:*
   `POST`
   
-* *Sample call:*
+* *RequestBody:*
 _{
 	"title": "Inception",
 	"rating": 8.3,
@@ -27,6 +27,11 @@ _{
 	`actors=[List<String>]`
 
 **Get movie**
+* *URL:*
+  _movies/{id}_
+
+* *Method:*
+  `GET`
 
 **Update movie**
 
