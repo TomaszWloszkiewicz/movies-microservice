@@ -4,9 +4,9 @@ Repository contain simple microservice for managing movies. It is connected with
 **Create movie**
 * *URL*
 
-  <_movies/_>
+  _movies/_
 
-* **Method:**
+* *Method:*
   
   `POST`
 
