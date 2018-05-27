@@ -2,6 +2,13 @@
 Repository contain simple microservice for managing movies. It is connected with approving-microservice.
 
 **Create movie**
+* **URL**
+
+  <_movies/_>
+
+* **Method:**
+  
+  `POST`
 
 **Get movie**
 
