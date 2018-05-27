@@ -15,6 +15,10 @@ _{
 	"director": "Christopher Nolan",
 	"actors":["Leonardo DiCaprio", "Ellen Page"]
 }_
+*Required:* `title=[String]`
+`rating=[Double]`
+`director=[String]`
+`actors=[List<String>]`
 
 **Get movie**
 
