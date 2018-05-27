@@ -94,18 +94,15 @@ _{
   `PUT`
 * *RequestBody:*
 _{
-	"title": "Inception",
-	"rating": 8.3,
-	"director": "Christopher Nolan",
-	"actors":["Leonardo DiCaprio", "Ellen Page"]
+    "reviewContent": "I loved this movie. I thought it was one of the best of the year. The visuals were incredible, and the story was creative sci-fi adventure.",
+    "rating": 9,
+    "userName": "Leonardo"
 }_
 
    *Required:* 
    
-	`title=[String]` - Title must have at least 3 characters up to 50 and can contain only letters.
+	`reviewContent=[String]` - Conent must have at least 10 characters up to 250.
 
 	`rating=[Double]` - Rating should be between 1 and 10. 
 
-	`director=[String]`
-
-	`actors=[List<String>]`
+	`userName=[String]` - Username must have at least 3 characters up to 15.
