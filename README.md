@@ -75,5 +75,10 @@ _{
 **Get list of movies with rating greater than**
 
 **Get list of sorted movies by rating**
+* *URL:*
+  _/movies/sortedByRating_
+
+* *Method:*
+  `GET`
 
 **Add review for movie**
