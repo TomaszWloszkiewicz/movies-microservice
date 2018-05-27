@@ -52,6 +52,7 @@ public class MovieService {
         if(violations.size()>0 || movie1 == null){
             return false;
         }
+        movie.setId(movieId);
         movie.setAddedAt(getDataFormatFromNow(Instant.now()));
         movieRepository.save(movie);
         return true;

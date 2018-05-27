@@ -63,4 +63,8 @@ public class Movie {
     public void setAddedAt(String addedAt) {
         this.addedAt = addedAt;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
