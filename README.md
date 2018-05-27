@@ -16,7 +16,8 @@ _{
 	"actors":["Leonardo DiCaprio", "Ellen Page"]
 }_
 
-*Required:* 
+   *Required:* 
+   
 	`title=[String]` - Title must have at least 3 characters up to 50 and can contain only letters.
 
 	`rating=[Double]` - Rating should be between 1 and 10. 
