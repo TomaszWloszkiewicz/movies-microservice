@@ -52,7 +52,7 @@ public class MovieController {
     public ResponseEntity<?> updateMovie(@PathVariable("id") String movieId, @RequestBody Movie movie){
         boolean updatedFlag = movieService.updateMovie(movie, movieId);
         if(updatedFlag == false){
-            return new Response("Can not update movie", HttpStatus.NOT_ACCEPTABLE);
+            return new Response("Could not update movie", HttpStatus.NOT_ACCEPTABLE);
         }
 
         return new Response("Movie updated", HttpStatus.OK);
