@@ -9,7 +9,6 @@ Repository contain simple microservice for managing movies. It is connected with
   `POST`
   
 * *Sample call:*
-
 _{
 	"title": "Inception",
 	"rating": 8.3,
