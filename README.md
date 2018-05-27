@@ -7,6 +7,15 @@ Repository contain simple microservice for managing movies. It is connected with
 
 * *Method:*
   `POST`
+  
+* *Sample call:*
+
+_{
+	"title": "Inception",
+	"rating": 8.3,
+	"director": "Christopher Nolan",
+	"actors":["Leonardo DiCaprio", "Ellen Page"]
+}_
 
 **Get movie**
 
