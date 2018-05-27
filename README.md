@@ -15,9 +15,12 @@ _{
 	"director": "Christopher Nolan",
 	"actors":["Leonardo DiCaprio", "Ellen Page"]
 }_
-*Required:* `title=[String]`
-`rating=[Double]`
+*Required:* `title=[String]` - Title must have at least 3 characters up to 50 and can contain only letters.
+
+`rating=[Double]` - Rating should be between 1 and 10. 
+
 `director=[String]`
+
 `actors=[List<String>]`
 
 **Get movie**
